@@ -8,13 +8,15 @@ require_relative './lib/analyzer'
 
 urls = JSON.parse(File.read("posts.json"))
 
-urls.each do |url|
+urls.shuffle.each do |url|
   puts
   puts url
   html = RestClient.get(url) rescue nil
   puts Analyzer.new(html).users.map(&:username).inspect
 end
 
+# .fn[itemprop='author']
+# meta[name='author']
 
 
 

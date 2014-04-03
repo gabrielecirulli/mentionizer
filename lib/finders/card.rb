@@ -3,11 +3,14 @@ require_relative './base'
 module Finders
   class Card < Base
     METAS = %w(twitter:creator twitter:site)
+    INVALID_USERNAMES = %w(tumblr)
 
     def find
       METAS.each do |meta|
         content = meta_content(meta)
-        return [ User.new(content) ] if content
+        if content && !INVALID_USERNAMES.include?(content)
+          return [ User.new(content) ]
+        end
       end
       []
     end
