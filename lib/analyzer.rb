@@ -7,8 +7,7 @@ class Analyzer < Struct.new(:html)
   FINDERS = [
     Finders::Card,
     Finders::ShareIntent,
-    Finders::Link,
-    Finders::Username
+    Finders::Link
   ]
 
   def users
