@@ -6,4 +6,4 @@ gem 'pry'
 gem 'activesupport'
 gem 'sinatra'
 gem 'sinatra-jsonp'
-
+gem 'puma'
