@@ -2,9 +2,8 @@ require_relative './finders'
 require_relative './user'
 
 require "nokogiri"
-require "rest-client"
 
-class Analyzer < Struct.new(:url)
+class Analyzer < Struct.new(:html)
   FINDERS = [
     Finders::Card,
     Finders::ShareIntent,
@@ -25,10 +24,6 @@ class Analyzer < Struct.new(:url)
 
   def document
     @document ||= Nokogiri::HTML.parse(html)
-  end
-
-  def html
-    @html ||= RestClient.get(url)
   end
 end
 

@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 require "json"
+require "rest-client"
 
 require_relative './lib/analyzer'
 
@@ -10,7 +11,8 @@ urls = JSON.parse(File.read("posts.json"))
 urls.each do |url|
   puts
   puts url
-  puts Analyzer.new(url).users.map(&:username).inspect
+  html = RestClient.get(url) rescue nil
+  puts Analyzer.new(html).users.map(&:username).inspect
 end
 
 
