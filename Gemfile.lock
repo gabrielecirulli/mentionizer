@@ -3,6 +3,7 @@ GEM
   specs:
     coderay (1.1.0)
     method_source (0.8.2)
+    mime-types (2.2)
     mini_portile (0.5.3)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -10,6 +11,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     slop (3.5.0)
 
 PLATFORMS
@@ -18,3 +21,4 @@ PLATFORMS
 DEPENDENCIES
   nokogiri
   pry
+  rest-client

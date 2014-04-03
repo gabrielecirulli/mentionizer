@@ -1,16 +1,17 @@
+require 'rubygems'
+require 'bundler/setup'
+
 require "json"
-require "open-uri"
-require "nokogiri"
 
-posts = JSON.parse(File.read("posts.json"))
+require_relative './lib/analyzer'
 
-puts "Got #{posts.size} posts."
+urls = JSON.parse(File.read("posts.json"))
 
-url = posts.sample
-puts "Sampled post: #{url}"
-
-doc = Nokogiri::HTML.parse(url)
-
+urls.each do |url|
+  puts
+  puts url
+  puts Analyzer.new(url).users.map(&:username).inspect
+end
 
 
 
