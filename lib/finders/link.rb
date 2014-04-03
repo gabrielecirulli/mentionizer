@@ -21,6 +21,10 @@ module Finders
     end
 
     def parse_username(url)
+      if url =~ %r{^//}
+        url = 'http:' + url
+      end
+
       uri = URI(url)
 
       return nil unless VALID_SCHEMES.include?(uri.scheme)
@@ -32,7 +36,7 @@ module Finders
       return nil if INVALID_USERNAMES.include?(chunks.first)
 
       chunks.first
-    rescue ArgumentError
+    rescue URI::InvalidURIError, ArgumentError
       nil
     end
   end

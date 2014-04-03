@@ -1,12 +1,12 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require "json"
-require "rest-client"
+require 'json'
+require 'rest-client'
 
 require_relative './lib/analyzer'
 
-urls = JSON.parse(File.read("posts.json"))
+urls = JSON.parse(File.read('posts.json'))
 
 urls.shuffle.each do |url|
   puts

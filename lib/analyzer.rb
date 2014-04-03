@@ -1,7 +1,7 @@
 require_relative './finders'
 require_relative './user'
 
-require "nokogiri"
+require 'nokogiri'
 
 class Analyzer < Struct.new(:html)
   FINDERS = [
