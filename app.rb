@@ -10,6 +10,7 @@ class App < Sinatra::Base
   post '/users' do
     begin
       users = Analyzer.new(params[:html]).users
+      response['Access-Control-Allow-Origin'] = '*'
       jsonp(users.map(&:as_json))
     rescue => e
       jsonp(
