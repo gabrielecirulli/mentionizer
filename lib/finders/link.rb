@@ -1,10 +1,12 @@
 require_relative './base'
 require 'uri'
+require 'active_support/core_ext/object/blank'
 
 module Finders
   class Link < Base
     VALID_SCHEMES = %w(http https)
     VALID_DOMAINS = %w(twitter.com www.twitter.com)
+    INVALID_USERNAMES = %w(share about privacy jobs)
 
     def find
       usernames.map do |username|
@@ -20,12 +22,16 @@ module Finders
 
     def parse_username(url)
       uri = URI(url)
-      interesting = VALID_SCHEMES.include?(uri.scheme) &&
-                    VALID_DOMAINS.include?(uri.host)
 
-      if interesting
-        uri.path.gsub(/^\//, '')
-      end
+      return nil unless VALID_SCHEMES.include?(uri.scheme)
+      return nil unless VALID_DOMAINS.include?(uri.host)
+
+      chunks = uri.path.split(/\//).select(&:present?)
+
+      return nil if chunks.size != 1
+      return nil if INVALID_USERNAMES.include?(chunks.first)
+
+      chunks.first
     rescue ArgumentError
       nil
     end

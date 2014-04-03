@@ -2,18 +2,23 @@ require_relative './base'
 
 module Finders
   class Card < Base
+    METAS = %w(twitter:creator twitter:site)
+
     def find
-      if meta_tag
-        [ User.new(meta_tag['content']) ]
-      else
-        []
+      METAS.each do |meta|
+        content = meta_content(meta)
+        return [ User.new(content) ] if content
       end
+      []
     end
 
     private
 
-    def meta_tag
-      @meta_tag ||= document.at_css("meta[name='twitter:creator']")
+    def meta_content(name)
+      tag = document.at_css("meta[name='#{name}']")
+      if tag
+        tag['content']
+      end
     end
   end
 end
