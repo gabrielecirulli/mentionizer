@@ -2,23 +2,17 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'json'
-require 'rest-client'
+require 'open-uri'
 
-require_relative './lib/analyzer'
+$:.unshift(File.dirname(__FILE__) + "/lib")
 
-urls = JSON.parse(File.read('posts.json'))
+require 'analyzer'
 
-urls.shuffle.each do |url|
-  puts
-  puts url
-  html = RestClient.get(url) rescue nil
-  puts Analyzer.new(html).users.map(&:username).inspect
-end
+html = File.read('foo.html')
+puts Analyzer.new(html).users.map(&:username).inspect
 
 # .fn[itemprop='author']
 # meta[name='author']
-
-
 
 # User score = occurrences * followers * multiplier
 # Multiplier = 2 if link is in the http://twitter.com/madeofcode format or meta tag twitter:creator

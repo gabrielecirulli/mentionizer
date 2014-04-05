@@ -1,4 +1,5 @@
-require_relative './finders/card'
-require_relative './finders/link'
-require_relative './finders/share_intent'
+require 'finders/card'
+require 'finders/link'
+require 'finders/share_intent'
+require 'finders/iframe_button'
 

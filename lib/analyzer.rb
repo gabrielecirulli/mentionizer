@@ -1,5 +1,5 @@
-require_relative './finders'
-require_relative './user'
+require 'finders'
+require 'user'
 
 require 'nokogiri'
 
@@ -7,7 +7,8 @@ class Analyzer < Struct.new(:html)
   FINDERS = [
     Finders::Card,
     Finders::ShareIntent,
-    Finders::Link
+    Finders::IframeButton,
+    Finders::Link,
   ]
 
   def users

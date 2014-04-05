@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/jsonp'
 require 'json'
 
-require_relative 'lib/analyzer'
+require 'analyzer'
 
 class App < Sinatra::Base
   helpers Sinatra::Jsonp

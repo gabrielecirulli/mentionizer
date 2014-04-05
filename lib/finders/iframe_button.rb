@@ -1,12 +1,10 @@
 require 'finders/base'
-require 'uri'
 require 'active_support/core_ext/object/blank'
 
 module Finders
-  class Link < Base
+  class IframeButton < Base
     VALID_SCHEMES = %w(http https)
-    VALID_DOMAINS = %w(twitter.com www.twitter.com)
-    INVALID_USERNAMES = %w(share about privacy jobs)
+    VALID_DOMAINS = %w(platform.twitter.com)
 
     def find
       usernames.map do |username|
@@ -15,8 +13,8 @@ module Finders
     end
 
     def usernames
-      document.css('a').map do |element|
-        parse_username(element['href'])
+      document.css("iframe").map do |iframe|
+        parse_username(iframe['src'])
       end.compact.uniq
     end
 
@@ -29,13 +27,13 @@ module Finders
 
       return nil unless VALID_SCHEMES.include?(uri.scheme)
       return nil unless VALID_DOMAINS.include?(uri.host)
+      return nil unless uri.fragment.present?
 
-      chunks = uri.path.split(/\//).select(&:present?)
+      params = CGI::parse(uri.fragment)
 
-      return nil if chunks.size != 1
-      return nil if INVALID_USERNAMES.include?(chunks.first)
+      return nil unless params["via"].present?
 
-      chunks.first
+      return params["via"].first
     rescue URI::InvalidURIError, ArgumentError
       nil
     end

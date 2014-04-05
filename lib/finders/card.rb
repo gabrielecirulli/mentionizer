@@ -1,4 +1,4 @@
-require_relative './base'
+require 'finders/base'
 
 module Finders
   class Card < Base
