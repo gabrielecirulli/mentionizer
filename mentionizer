@@ -1,15 +1,16 @@
+#!/usr/bin/env ruby
+
 require 'rubygems'
 require 'bundler/setup'
-
-require 'json'
-require 'open-uri'
 
 $:.unshift(File.dirname(__FILE__) + "/lib")
 
 require 'analyzer'
 
-html = File.read('foo.html')
-puts Analyzer.new(html).users.map(&:username).inspect
+html = STDIN.read
+analyzer = Analyzer.new(html)
+users = analyzer.users
+puts users.map(&:username).inspect
 
 # .fn[itemprop='author']
 # meta[name='author']

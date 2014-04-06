@@ -3,13 +3,16 @@ require 'finders/base'
 module Finders
   class Card < Base
     METAS = %w(twitter:creator twitter:site)
-    INVALID_USERNAMES = %w(tumblr)
+    INVALID_USERNAMES = %w(tumblr wordpressdotcom jetpack)
 
     def find
       METAS.each do |meta|
         content = meta_content(meta)
-        if content && !INVALID_USERNAMES.include?(content)
-          return [ User.new(content) ]
+        if content
+          user = User.new(content)
+          if !INVALID_USERNAMES.include?(user.username)
+            return [ user ]
+          end
         end
       end
       []
