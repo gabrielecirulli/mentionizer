@@ -6,6 +6,7 @@ require 'analyzer'
 
 class App < Sinatra::Base
   helpers Sinatra::Jsonp
+  set :public_folder, File.dirname(__FILE__) + '/static'
 
   post '/users' do
     begin
