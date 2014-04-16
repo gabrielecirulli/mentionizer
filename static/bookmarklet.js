@@ -31,16 +31,79 @@
         text = document.title;
       }
 
-      if (usernames && usernames.length > 0) {
+      if (usernames) {
         mentions = []
-        for (var i=0; i < usernames.length; i++) {
-          mentions.push("@" + usernames[i].username);
-        }
+        usernames.forEach(function(user) {
+          mentions.push("@" + user.username);
+        });
         text += " via " + mentions.join(" ");
       }
 
       cb(window.location.href, text);
     });
+  }
+
+  var CONTAINER_CSS = {
+    border:          'none',
+    height:          '100%',
+    width:           '100%',
+    position:        'fixed',
+    zIndex:          '2147483646',
+    top:             '0',
+    left:            '0',
+    display:         'block',
+    maxWidth:        '100%',
+    maxHeight:       '100%',
+    padding:         '0',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    fontFamily:      '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+    fontWeight:      300
+  }
+
+  function applyCss(element, rules) {
+    Object.keys(rules).forEach(function(rule) {
+      element.style[rule] = rules[rule];
+    });
+  }
+
+  function generateOpenerButton(text, bgcolor, url, width, height) {
+    var container = document.createElement('div');
+    applyCss(container, CONTAINER_CSS);
+    applyCss(container, {
+      display: 'table'
+    });
+
+    container.addEventListener('click', function() {
+      document.body.removeChild(container);
+    });
+
+    var wrapper = document.createElement('div');
+    applyCss(wrapper, {
+      display:       'table-cell',
+      verticalAlign: 'middle',
+      textAlign:     'center'
+    });
+    container.appendChild(wrapper);
+
+    var button = document.createElement('a');
+    button.setAttribute('href', 'javascript:void(0)');
+    button.textContent = text;
+    applyCss(button, {
+      padding:            '20px 30px',
+      color:              '#fff',
+      fontSize:           '20px',
+      textDecoration:     'none',
+      borderRadius:       '3px',
+      mozBorderRadius:    '3px',
+      webkitBorderRadius: '3px',
+      backgroundColor:    bgcolor
+    });
+    button.addEventListener('click', function() {
+      window.open(url, 'Share', 'width=' + width + ',height=' + height + ',toolbar=0,location=0,status=0,scrollbars=yes');
+    });
+    wrapper.appendChild(button);
+
+    document.body.appendChild(container);
   }
 
   function openBuffer() {
@@ -49,22 +112,7 @@
 
       frame.allowtransparency = 'true';
       frame.scrolling = 'no';
-      frame.style.cssText = [
-        'border:none;',
-        'height:100%;',
-        'width:100%;',
-        'position:fixed!important;',
-        'z-index:2147483646;',
-        'top:0;',
-        'left:0;',
-        'display:block!important;',
-        'max-width:100%!important;',
-        'max-height:100%!important;',
-        'padding:0!important;',
-        'background:none;',
-        'background-color:transparent;',
-        'background-color:rgba(0, 0, 0, 0.1);'
-      ].join('');
+      applyCss(frame, CONTAINER_CSS);
 
       var params = [
         "url=" + encodeURIComponent(url),
@@ -92,7 +140,7 @@
       ];
 
       var url = "https://hootsuite.com/hootlet/load?" + params.join("&");
-      window.open(url, 'Share', 'width=700,height=250,toolbar=0,location=0,status=0,scrollbars=yes');
+      generateOpenerButton('Share with Hootsuite', '#424A55', url, 700, 250);
     });
   }
 
@@ -104,7 +152,7 @@
       ];
 
       var url = "https://twitter.com/intent/tweet?" + params.join("&");
-      window.open(url, 'Share', 'width=670,height=460,toolbar=0,location=0,status=0,scrollbars=yes');
+      generateOpenerButton('Share on Twitter', '#29A9E0', url, 670, 460);
     });
   }
 
