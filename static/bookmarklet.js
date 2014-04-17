@@ -20,7 +20,81 @@
     }
   }
 
+  var CONTAINER_CSS = {
+    border:          'none',
+    height:          '100%',
+    width:           '100%',
+    position:        'fixed',
+    zIndex:          '2147483646',
+    top:             '0',
+    left:            '0',
+    display:         'block',
+    maxWidth:        '100%',
+    maxHeight:       '100%',
+    padding:         '0',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    fontFamily:      '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
+    fontWeight:      300
+  }
+
+  var CSS_ANIMATIONS = [
+    '@-webkit-keyframes mentionizerRotateplane {',
+    '  0% { -webkit-transform: perspective(120px) }',
+    '  50% { -webkit-transform: perspective(120px) rotateY(180deg) }',
+    '  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }',
+    '}',
+    '@keyframes mentionizerRotateplane {',
+    '  0% {',
+    '    transform: perspective(120px) rotateX(0deg) rotateY(0deg);',
+    '    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);',
+    '  } 50% {',
+    '    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);',
+    '    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);',
+    '  } 100% {',
+    '    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);',
+    '    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);',
+    '  }',
+    '}'
+  ].join("\n");
+
+  function applyCss(element, rules) {
+    Object.keys(rules).forEach(function(rule) {
+      element.style[rule] = rules[rule];
+    });
+  }
+
   function fetchParams(cb) {
+    var keyframeContainer = document.createElement('style');
+    keyframeContainer.textContent = CSS_ANIMATIONS;
+    document.head.appendChild(keyframeContainer);
+
+    var container = document.createElement('div');
+    applyCss(container, CONTAINER_CSS);
+    applyCss(container, {
+      display: 'table'
+    });
+
+    var wrapper = document.createElement('div');
+    applyCss(wrapper, {
+      display:       'table-cell',
+      verticalAlign: 'middle',
+      textAlign:     'center'
+    });
+    container.appendChild(wrapper);
+
+    var loading = document.createElement('div');
+    applyCss(loading, {
+       width:           '60px',
+       height:          '60px',
+       backgroundColor: '#29A9E0',
+       margin:          '0 auto',
+       WebkitAnimation: 'mentionizerRotateplane 1.2s infinite ease-in-out',
+       animation:       'mentionizerRotateplane 1.2s infinite ease-in-out'
+    });
+    wrapper.appendChild(loading);
+
+    document.body.appendChild(container);
+
     fetchUsers(document.documentElement.outerHTML, function(usernames) {
       var text;
 
@@ -40,29 +114,8 @@
       }
 
       cb(window.location.href, text);
-    });
-  }
 
-  var CONTAINER_CSS = {
-    border:          'none',
-    height:          '100%',
-    width:           '100%',
-    position:        'fixed',
-    zIndex:          '2147483646',
-    top:             '0',
-    left:            '0',
-    display:         'block',
-    maxWidth:        '100%',
-    maxHeight:       '100%',
-    padding:         '0',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    fontFamily:      '"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif',
-    fontWeight:      300
-  }
-
-  function applyCss(element, rules) {
-    Object.keys(rules).forEach(function(rule) {
-      element.style[rule] = rules[rule];
+      document.body.removeChild(container);
     });
   }
 
