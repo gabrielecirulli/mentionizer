@@ -5,8 +5,10 @@ require 'json'
 require 'analyzer'
 
 class App < Sinatra::Base
-  helpers Sinatra::Jsonp
-  set :public_folder, File.dirname(__FILE__) + '/static'
+  configure do
+    use Rack::Logger
+    helpers Sinatra::Jsonp
+  end
 
   post '/users' do
     begin
