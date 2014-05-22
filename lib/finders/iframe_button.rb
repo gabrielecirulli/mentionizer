@@ -5,8 +5,9 @@ module Finders
   class IframeButton < Base
     VALID_SCHEMES = %w(http https)
     VALID_DOMAINS = %w(platform.twitter.com)
+    VALID_PARAMS = %w(via screen_name)
 
-    def find
+    def users
       usernames.map do |username|
         User.new(username)
       end
@@ -30,10 +31,7 @@ module Finders
       return nil unless uri.fragment.present?
 
       params = CGI::parse(uri.fragment)
-
-      return nil unless params["via"].present?
-
-      return params["via"].first
+      params.values_at(VALID_PARAMS).first
     rescue URI::InvalidURIError, ArgumentError
       nil
     end

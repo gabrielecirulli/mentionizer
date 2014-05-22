@@ -1,6 +1,6 @@
 module Finders
   class Base < Struct.new(:document)
-    def find
+    def users
       []
     end
   end

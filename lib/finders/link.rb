@@ -8,7 +8,7 @@ module Finders
     VALID_DOMAINS = %w(twitter.com www.twitter.com)
     INVALID_USERNAMES = %w(share about privacy jobs)
 
-    def find
+    def users
       usernames.map do |username|
         User.new(username)
       end

@@ -9,15 +9,11 @@ require 'analyzer'
 
 html = STDIN.read
 analyzer = Analyzer.new(html)
-users = analyzer.users
-puts users.map(&:username).inspect
-
-# .fn[itemprop='author']
-# meta[name='author']
-
-# User score = occurrences * followers * multiplier
-# Multiplier = 2 if link is in the http://twitter.com/madeofcode format or meta tag twitter:creator
-
-# Potential methods
-# Check each A tag for urls pointing to twitter
+finder = analyzer.matching_finder
+if finder
+  puts finder.class.name
+  puts finder.users.map(&:username).inspect
+else
+  puts "No matching finder"
+end
 

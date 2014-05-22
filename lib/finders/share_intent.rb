@@ -4,7 +4,7 @@ module Finders
   class ShareIntent < Base
     INTENT_URL = "https://twitter.com/share"
 
-    def find
+    def users
       if intent_links
         intent_links.map { |link| User.new(link['data-via']) }
       else

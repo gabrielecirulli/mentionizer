@@ -5,7 +5,7 @@ module Finders
     METAS = %w(twitter:creator twitter:site)
     INVALID_USERNAMES = %w(tumblr wordpressdotcom jetpack)
 
-    def find
+    def users
       METAS.each do |meta|
         content = meta_content(meta)
         if content
