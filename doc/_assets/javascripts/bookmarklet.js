@@ -110,7 +110,7 @@
         usernames.forEach(function(user) {
           mentions.push("@" + user.username);
         });
-        text += " via " + mentions.join(" ");
+        text += " by " + mentions.join(" ");
       }
 
       cb(window.location.href, text);
