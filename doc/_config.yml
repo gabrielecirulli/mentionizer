@@ -1,0 +1,20 @@
+name: Mentionizer
+markdown: redcarpet
+pygments: true
+baseurl: '/mentionizer'
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - bookmarklet.js
+
+assets:
+  css_compressor: sass
+  js_compressor:  uglifier
+  baseurl: '/mentionizer/assets/'
+  cachebust: soft
+  sources:
+    - _assets/fonts
+    - _assets/javascripts
+    - _assets/stylesheets
+
