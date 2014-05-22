@@ -105,7 +105,7 @@
         text = document.title;
       }
 
-      if (usernames) {
+      if (usernames && usernames.length > 0) {
         mentions = []
         usernames.forEach(function(user) {
           mentions.push("@" + user.username);
