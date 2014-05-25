@@ -1,3 +1,4 @@
+require 'twitter_url'
 require 'finders/base'
 
 module Finders
@@ -23,7 +24,8 @@ module Finders
     def meta_content(name)
       tag = document.at_css("meta[name='#{name}']")
       if tag
-        tag['content']
+        content = tag['content']
+        TwitterUrl.new(content).username || content
       end
     end
   end
