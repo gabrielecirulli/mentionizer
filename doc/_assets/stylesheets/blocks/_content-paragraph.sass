@@ -1,0 +1,27 @@
+.content-paragraph
+  margin-bottom: 60px
+
+.content-paragraph__text
+  text-align: justify
+
+.content-paragraph__figure
+  width: 200px
+  margin: 0 auto
+
+@media screen and (min-width: 600px)
+  
+  .content-paragraph
+    +clearfix
+
+  .content-paragraph__text
+    width: 60%
+    float: left
+    text-align: left
+
+  .content-paragraph__figure
+    width: 25%
+    float: right
+
+  .content-paragraph__figure--vertical
+    img
+      max-height: 135px

@@ -1,4 +1,7 @@
 baseurl: '/'
 assets:
   baseurl: '/assets/'
-
+  sources:
+    - _assets/fonts
+    - _assets/javascripts
+    - _assets/stylesheets
