@@ -3,24 +3,50 @@ layout: default
 title: Mentionizer
 ---
 
-<div class="heading">
-  <img class="logo" src="img/logo.svg" alt="">
-  <h1 class="title">Mentionizer</h1>
-</div>
+<header class="heading">
+  <h1 class="heading__logo">Mentionizer</h1>
+</header>
 
-<div class="content">
-  <p>It's good <strong>Twitter Etiquette&#8482;</strong> to mention the person who wrote an article when tweeting about it!</p>
+<section class="content">
+  <div class="content-paragraph">
+    <div class="content-paragraph__text">
+      <p>It's good <strong>Twitter Etiquette&#8482;</strong> to mention the person who wrote an article when tweeting about it!</p>
+    </div>
+    <figure class="content-paragraph__figure">
+      <img src="img/author.svg" alt="Etiquette" title="Etiquette">
+    </figure>
+  </div>
 
-  <p><strong>Mentionizer</strong> helps you quickly discover the twitter handle of whoever wrote the blog post you're reading, so that you don't have to scavenge for information on the page.</p>
-
-  <p>To use the bookmarklet just drag the <strong>Mentionizer</strong> button to your Bookmarks Bar, browse for a page you like and then click it.</p>
+  <div class="content-paragraph">
+    <div class="content-paragraph__text">
+      <p><strong>Mentionizer</strong> helps you quickly discover the twitter handle of whoever wrote the blog post you're reading, so that you don't have to scavenge for information on the page.</p>
+    </div>
+    <figure class="content-paragraph__figure content-paragraph__figure--vertical">
+      <img src="img/who-author-is.svg" alt="Who is the Author?" title="Who is the Author?">
+    </figure>
+  </div>
+  
+  <div class="content-paragraph">
+    <div class="content-paragraph__text">
+      <p>To use the bookmarklet just <strong>drag the Mentionizer</strong> button to your Bookmarks Bar, browse for a page you like and then click it.</p>
+    </div>
+    <figure class="content-paragraph__figure">
+      <img src="img/how-to.svg" alt="How to use Mentionizer" title="How to use Mentionizer">
+    </figure>
+  </div>
 
   <div class="button-group">
-    <a href="{% inline_bookmarklet twitter %}" class="bookmarklet bookmarklet--twitter">Mentionizer</a>
-    <a href="{% inline_bookmarklet buffer %}" class="bookmarklet bookmarklet--buffer">Mentionizer</a>
-    <a href="{% inline_bookmarklet hootsuite %}" class="bookmarklet bookmarklet--hootsuite">Mentionizer</a>
+    <div class="button-group__item">
+      <a href="{% inline_bookmarklet twitter %}" class="bookmarklet bookmarklet--twitter">Vanilla version</a>
+    </div>
+    <div class="button-group__item">
+      <a href="{% inline_bookmarklet buffer %}" class="bookmarklet bookmarklet--buffer">Buffer version</a>
+    </div>
+    <div class="button-group__item">
+      <a href="{% inline_bookmarklet hootsuite %}" class="bookmarklet bookmarklet--hootsuite">Hootsuite version</a>
+    </div>
   </div>
-</div>
+</section>
 
-<p class="footer">Made in <a href="http://www.cantierecreativo.net/">Cantiere Creativo</a>, by <a href="http://twitter.com/gabrielecirulli">@gabrielecirulli</a> and <a href="http://twitter.com/steffoz">@steffoz</a>.</p>
+<footer class="footer">Made in <a href="http://www.cantierecreativo.net/">Cantiere Creativo</a>, by <a href="http://twitter.com/gabrielecirulli">@gabrielecirulli</a> and <a href="http://twitter.com/steffoz">@steffoz</a>.</footer>
 

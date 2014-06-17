@@ -1,0 +1,19 @@
+.heading 
+  @include animation(enter 1s ease)
+  position: relative
+  margin-top: 50px
+  margin-bottom: 40px
+  text-align: center
+
+.heading__logo
+  height: 60px
+  background-image: url('/img/logo-mentionizer.svg')
+  background-repeat: no-repeat
+  text-indent: -9999px
+
+@media screen and (min-width: 600px)
+  .heading 
+    margin-bottom: 80px
+
+  .heading__logo
+    height: 110px
