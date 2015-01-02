@@ -30,7 +30,7 @@ module Finders
       return nil unless VALID_DOMAINS.include?(uri.host)
       return nil unless uri.fragment.present?
 
-      params = CGI::parse(uri.fragment)
+      params = Rack::Utils.parse_query(uri.fragment)
       params.values_at(VALID_PARAMS).first
     rescue URI::InvalidURIError, ArgumentError
       nil
