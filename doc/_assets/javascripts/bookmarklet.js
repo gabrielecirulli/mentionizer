@@ -2,7 +2,7 @@
   function fetchUsers(html, cb) {
     var request = new XMLHttpRequest();
 
-    request.open("POST", "http://mentionizer.herokuapp.com/users", true);
+    request.open("POST", "//mentionizer.herokuapp.com/users", true);
     request.setRequestHeader(
       "Content-Type",
       "application/x-www-form-urlencoded; charset=UTF-8"
