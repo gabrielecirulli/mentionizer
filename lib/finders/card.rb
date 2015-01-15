@@ -22,7 +22,11 @@ module Finders
     private
 
     def meta_content(name)
-      tag = document.at_css("meta[name='#{name}']")
+      tag = [
+        document.at_css("meta[name='#{name}']"),
+        document.at_css("meta[property='#{name}']")
+      ].compact.first
+
       if tag
         content = tag['content']
         TwitterUrl.new(content).username || content
